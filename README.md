@@ -27,7 +27,11 @@ git clone https://github.com/notexploiting/file-organizer
 ```bash
 cd file-organizer
 ```
-6. Run the script wth the source directory as an argument:
+6. Install the required packages:
+```bash
+pip install -r requirements.txt
+```
+7. Run the script wth the source directory as an argument:
 ```bash
 python file_organizer.py /path/to/your/directory
 ```
