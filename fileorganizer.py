@@ -4,8 +4,26 @@ import argparse
 
 # Define the default file type to folder mapping
 FILE_TYPES = {
-    'exe': 'Executables',
-    'mp3': 'Music'
+    'mp3': 'Music',
+    'flac': 'Music',
+    'wav': 'Music',
+    'pdf': 'Documents',
+    'docx': 'Documents',
+    'doc': 'Documents',
+    'txt': 'TextFiles',
+    'jpg': 'Images',
+    'jpeg': 'Images',
+    'png': 'Images',
+    'heic': 'Images',
+    'gif': 'Images',
+    'webp': 'Images',
+    'xlsx': 'Spreadsheets',
+    'csv': 'Spreadsheets',
+    'ppt': 'Presentations',
+    'pptx': 'Presentations',
+    'mp4': 'Videos',
+    'avi': 'Videos',
+    'mkv': 'Videos'
 }
 
 def organize_files(dir):
@@ -33,13 +51,22 @@ def organize_files(dir):
                 print(f"Created folder: {destination}")
 
             # Move the file to the destination folder
-            file = os.path.join(dir, filename)
+            source_file = os.path.join(dir, filename)
+            destination_file = os.path.join(destination, filename)
 
-            # To be added: try except for attempting to move file to folder
-
+            # Attempt to move the file into the destination 
+            try:
+                shutil.move(source_file, destination)
+                print(f"Moved: {source_file} to {destination_file}")
+            except Exception as e:
+                print(f"Error moving {source_file} to {destination_file}: {e}")
         else:
             print(f"The file extension '{file_extension}' was not specified in the `FILE_TYPES` dictionary.")
 
 if __name__ == '__main__':
-    # To be added: CLI 
-    ...
+    parser= argparse.ArgumentParser(description="A Python application that keeps your directories tidy by organizing files into folders based on their types")
+    parser.add_argument('source_directory', type=str, help='The directory to organize')
+    args = parser.parse_args()
+
+    organize_files(args.source_directory)
+    
